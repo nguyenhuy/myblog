@@ -124,3 +124,6 @@ def init_session_if_needed(request):
         init_session(request)
 
 
+def reset_session(request):
+    init_session(request)
+    return HttpResponseRedirect('/myblog/')

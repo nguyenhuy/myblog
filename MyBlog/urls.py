@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     (r'^editblog/(?P<blog_id>\d+)$', edit_blog),
     (r'^myblog/(?P<blog_id>\d+)$', show_blog),
     (r'^addblog/$', add_blog),
-    (r'^deleteblog/(?P<blog_id>\d+)$', delete_blog)
+    (r'^deleteblog/(?P<blog_id>\d+)$', delete_blog),
+    (r'^reset_session/$', reset_session)
     # url(r'^$', 'MyBlog.views.home', name='home'),
     # url(r'^MyBlog/', include('MyBlog.foo.urls')),
 
