@@ -120,7 +120,7 @@ def init_session(request):
 
 
 def init_session_if_needed(request):
-    if not request.session:
+    if not request.session or not request.session.has_key('start_date'):
         init_session(request)
 
 
