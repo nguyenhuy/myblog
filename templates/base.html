@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% block content %}{% endblock %}
+<hr/>
+<div id="footer">
+    Session start date:
+    {{ request.session.start_date |date:"N j, Y, P" }}<br/>
+    Articles visited: {{ request.session.visit_counter }}<br/>
+    Articles edited: {{ request.session.edit_counter }}<br/>
+    Articles created: {{ request.session.create_counter }}<br/>
+    Articles deleted: {{ request.session.delete_counter }}<br/>
+
+    <form action="/reset_session/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Reset session">
+    </form>
+</div>
+</body>
+</html>

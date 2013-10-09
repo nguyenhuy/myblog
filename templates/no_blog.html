@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blog with id: {{ id }} does not exist</title>
-</head>
-<body>
-    Blog with id: {{ id }} does not exist
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Blog with id: {{ id }} does not exist{% endblock %}
+{% block content %}Blog with id: {{ id }} does not exist.{% endblock %}

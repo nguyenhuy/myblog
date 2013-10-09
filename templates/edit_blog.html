@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-<form action="/editblog/{{ id }}" method="post">
-    {% csrf_token %}
-    <textarea name="content" cols="80" rows="30">{{ content }}</textarea>
-    <input type="submit" value="Save">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <form action="/editblog/{{ id }}" method="post">
+        {% csrf_token %}
+        <textarea name="content" cols="80" rows="30">{{ content }}</textarea>
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}
