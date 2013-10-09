@@ -17,9 +17,8 @@ def show_all_blogs(request):
 
 
 def edit_blog(request, blog_id):
-    blogs = Blog.objects.filter(id=blog_id)
-    if len(blogs) > 0:
-        blog = blogs[0]
+    if Blog.exists(blog_id):
+        blog = Blog.objects.get(id=blog_id)
         if request.method == "POST" and request.POST.has_key('content'):
             blog.content = request.POST['content'].strip()
             blog.save()
@@ -39,9 +38,8 @@ def edit_blog(request, blog_id):
 
 
 def show_blog(request, blog_id):
-    blogs = Blog.objects.filter(id=blog_id)
-    if len(blogs) > 0:
-        blog = blogs[0]
+    if Blog.exists(blog_id):
+        blog = Blog.objects.get(id=blog_id)
         return render_to_response("blog.html",
                                   {'title': blog.title,
                                    'content': blog.content},
@@ -71,9 +69,9 @@ def add_blog(request):
 
 
 def delete_blog(request, blog_id):
-    blogs = Blog.objects.filter(id=blog_id)
-    if len(blogs) > 0:
-        blogs.delete()
+    if Blog.exists(blog_id):
+        blog = Blog.objects.get(id=blog_id)
+        blog.delete()
         return HttpResponseRedirect('/myblog')
     else:
         return render_to_response("no_blog.html",
