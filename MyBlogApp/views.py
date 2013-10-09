@@ -19,11 +19,31 @@ def show_all_blogs(request):
 def edit_blog(request, blog_id):
     if Blog.exists(blog_id):
         blog = Blog.objects.get(id=blog_id)
-        if request.method == "POST" and request.POST.has_key('content'):
-            blog.content = request.POST['content'].strip()
-            blog.save()
-            return HttpResponseRedirect('/myblog')
+        if request.method == "POST" \
+            and request.POST.has_key('content') \
+            and request.session.has_key('edited_version'):
+            edited_version = int(request.session['edited_version'])
+            user_content = request.POST['content'].strip()
+            if edited_version == blog.version:
+                # The blog post has not been changed, it can be updated now.
+                blog.content = user_content
+                blog.version += 1
+                blog.save()
+                return HttpResponseRedirect('/myblog')
+            else:
+                # The article was changed by someone else, ask user to
+                # resolve conflicts.
+                request.session['edited_version'] = blog.version
+                return render_to_response("resolve_conflicts.html",
+                                   {
+                                       'id': blog.id,
+                                       'title': blog.title,
+                                       'current_content': blog.content,
+                                       'user_content': user_content
+                                   },
+                                   context_instance=RequestContext(request))
         else:
+            request.session['edited_version'] = blog.version
             return render_to_response("edit_blog.html",
                                       {
                                           'title': blog.title,
@@ -55,7 +75,6 @@ def add_blog(request):
         and request.POST.has_key('title') \
         and len(request.POST['title'].strip()) > 0 \
         and request.POST.has_key('content'):
-
         blog = Blog(title=request.POST['title'].strip(),
                     content=request.POST['content'].strip(),
                     time_stamp=datetime.now())

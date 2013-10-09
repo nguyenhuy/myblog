@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+<h1>{{ title }}</h1>
+The article was modified while you were editing it.
+<h2>Current version:</h2>
+
+<p>{{ current_content }}</p>
+
+<h2>Your version:</h2>
+
+<p>{{ user_content }}</p>
+
+<form action="/editblog/{{ id }}" method="post">
+    {% csrf_token %}
+    <textarea name="content" cols="80" rows="30">{{ current_content }}</textarea>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
+
+<html>
