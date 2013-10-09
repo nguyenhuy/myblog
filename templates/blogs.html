@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All blogs</title>
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}<br/>
+    {% endfor %}
+{% endif %}
+<a href="/addblog/">Add</a>
+<ul>
+    {% for blog in blogs %}
+        <li>
+            <a href="/myblog/{{ blog.id }}">{{ blog.title }}</a>
+            <a href="/editblog/{{ blog.id }}">[Edit]</a>
+            <a href="/deleteblog/{{ blog.id }}">[Delete]</a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

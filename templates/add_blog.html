@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add blog</title>
+</head>
+<body>
+<form action="/addblog/" method="post">
+    {% csrf_token %}
+    <textarea name="title" cols="30" rows="1" placeholder="Title"></textarea>
+    <br/>
+    <textarea name="content" cols="80" rows="30"placeholder="Content"></textarea>
+    <br/>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
