@@ -1,6 +1,7 @@
 # Create your views here.
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -18,6 +19,7 @@ def show_all_blogs(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def edit_blog(request, blog_id):
     init_session_if_needed(request)
     if Blog.exists(blog_id):
@@ -80,6 +82,7 @@ def show_blog(request, blog_id):
                                   context_instance=RequestContext(request))
 
 
+@login_required
 def add_blog(request):
     init_session_if_needed(request)
     if request.method == "POST" \
@@ -100,6 +103,7 @@ def add_blog(request):
                                   context_instance=RequestContext(request))
 
 
+@login_required
 def delete_blog(request, blog_id):
     init_session_if_needed(request)
     if Blog.exists(blog_id):
