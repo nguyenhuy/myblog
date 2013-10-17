@@ -156,3 +156,5 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_REDIRECT_URL = '/myblog'

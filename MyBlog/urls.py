@@ -12,7 +12,8 @@ urlpatterns = patterns('',
     (r'^addblog/$', add_blog),
     (r'^deleteblog/(?P<blog_id>\d+)$', delete_blog),
     (r'^reset_session/$', reset_session),
-    (r'^register/$', register)
+    (r'^register/$', register),
+    (r'^login/$', 'django.contrib.auth.views.login')
     # url(r'^$', 'MyBlog.views.home', name='home'),
     # url(r'^MyBlog/', include('MyBlog.foo.urls')),
 
