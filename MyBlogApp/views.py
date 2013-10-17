@@ -1,6 +1,7 @@
 # Create your views here.
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -127,3 +128,18 @@ def init_session_if_needed(request):
 def reset_session(request):
     init_session(request)
     return HttpResponseRedirect('/myblog/')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "User created.")
+            return HttpResponseRedirect('/myblog')
+    else:
+        form = UserCreationForm(request.POST)
+
+    return render_to_response("register.html",
+                              {'form': form},
+                              context_instance=RequestContext(request))
