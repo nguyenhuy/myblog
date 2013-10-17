@@ -23,8 +23,8 @@ def edit_blog(request, blog_id):
     if Blog.exists(blog_id):
         blog = Blog.objects.get(id=blog_id)
         if request.method == "POST" \
-                and request.POST.has_key('content') \
-                and request.session.has_key('edited_version'):
+            and request.POST.has_key('content') \
+            and request.session.has_key('edited_version'):
             edited_version = int(request.session['edited_version'])
             user_content = request.POST['content'].strip()
             if edited_version == blog.version:
@@ -69,8 +69,10 @@ def show_blog(request, blog_id):
         request.session['visit_counter'] += 1
         blog = Blog.objects.get(id=blog_id)
         return render_to_response("blog.html",
-                                  {'title': blog.title,
-                                   'content': blog.content},
+                                  {
+                                      'title': blog.title,
+                                      'content': blog.content
+                                  },
                                   context_instance=RequestContext(request))
     else:
         return render_to_response("no_blog.html",
@@ -81,9 +83,9 @@ def show_blog(request, blog_id):
 def add_blog(request):
     init_session_if_needed(request)
     if request.method == "POST" \
-            and request.POST.has_key('title') \
-            and len(request.POST['title'].strip()) > 0 \
-            and request.POST.has_key('content'):
+        and request.POST.has_key('title') \
+        and len(request.POST['title'].strip()) > 0 \
+        and request.POST.has_key('content'):
         blog = Blog(title=request.POST['title'].strip(),
                     content=request.POST['content'].strip(),
                     time_stamp=datetime.now())
@@ -143,3 +145,7 @@ def register(request):
     return render_to_response("register.html",
                               {'form': form},
                               context_instance=RequestContext(request))
+
+
+
+
