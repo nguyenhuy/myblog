@@ -1,4 +1,5 @@
 from django.conf.urls import patterns
+from MyBlogApp.rest_views import rest_add_blog
 from MyBlogApp.views import *
 
 # Uncomment the next two lines to enable the admin:
@@ -14,7 +15,8 @@ urlpatterns = patterns('',
     (r'^reset_session/$', reset_session),
     (r'^register/$', register),
     (r'^login/$', 'django.contrib.auth.views.login'),
-    (r'^logout/$', 'django.contrib.auth.views.logout_then_login')
+    (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
+    (r'^api/v1/blog/add$', rest_add_blog)
     # url(r'^$', 'MyBlog.views.home', name='home'),
     # url(r'^MyBlog/', include('MyBlog.foo.urls')),
 
