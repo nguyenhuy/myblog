@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     (r'^addblog/$', add_blog),
     (r'^deleteblog/(?P<blog_id>\d+)$', delete_blog),
     (r'^reset_session/$', reset_session),
-    (r'^register/$', register),
+    (r'^createuser/$', register),
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
     (r'^api/v1/blog/add$', rest_add_blog)
