@@ -7,6 +7,7 @@ from MyBlogApp.views import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', show_all_blogs),
     (r'^myblog/$', show_all_blogs),
     (r'^editblog/(?P<blog_id>\d+)$', edit_blog),
     (r'^myblog/(?P<blog_id>\d+)$', show_blog),
